@@ -103,8 +103,6 @@ level = [
 sprite_group = pygame.sprite.Group()
 sprite_group.add(hero)
 platforms = []
-
-# Уроовень
 total_level_weight = len(level[0]) * 40
 total_level_height = len(level) * 40
 camera = Camera(camera_func, total_level_weight, total_level_height)
