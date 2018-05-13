@@ -1,4 +1,4 @@
-from pygame.sprite import Sprite
+import pygame.time
 from pygame import Surface
 from pygame.sprite import Sprite, collide_rect
 from pygame.image import load
@@ -9,23 +9,48 @@ LIMIT_SPEED = 30
 class Player(Sprite):
     def __init__(self,x,y):
         Sprite.__init__(self)
-        self.image = load('ball.png')
-        self.rect = self.image.get_rect()
-        self.rect.x = x
+        self.image = load('ball1.png')
+        self.rect = self.image.get_rect() # Снятие прямоугольника с изображения
+        self.rect.x = x  # координаты этого прямоугольника
         self.rect.y = y
         self.yvel = 0
         self.xvel = 0
         self.onGround = False
 
+
+    def get_die(self,die_blocks,d):
+        for enemy in die_blocks:
+            if collide_rect(self, enemy):
+                if d == 0:
+                    self.rect.x = 80
+                    self.rect.y = 80
+                    self.yvel = 0
+                    self.xvel = 0
+                if d == 1:
+                    self.rect.x = 2600
+                    self.rect.y = 80
+                    self.yvel = 0
+                    self.xvel = 0      
+                if d == 2:
+                    self.rect.x = 80
+                    self.rect.y = 1400
+                    self.yvel = 0
+                    self.xvel = 0
+                if d == 3:
+                    self.rect.x = 2840
+                    self.rect.y = 1400
+                    self.yvel = 0
+                    self.xvel = 0
+
     def update(self,left,up,right,platforms):
         if left:
-            self.xvel += - MOVE_SPEED
+            self.xvel -=  MOVE_SPEED
             if abs(self.xvel) > LIMIT_SPEED:
                 self.xvel +=  MOVE_SPEED       
         if right:
             self.xvel += MOVE_SPEED
             if abs(self.xvel) > LIMIT_SPEED:
-                self.xvel += - MOVE_SPEED 
+                self.xvel -=  MOVE_SPEED 
  
         if not(left or right):
             self.xvel = 0
@@ -55,3 +80,5 @@ class Player(Sprite):
                 if yvel < 0:
                     self.rect.top = pl.rect.bottom
                     self.yvel = 0
+
+
