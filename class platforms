@@ -1,9 +1,59 @@
-from pygame.sprite import Sprite
 from pygame.image import load
+from pygame.sprite import Sprite, collide_rect
+
 class Platform(Sprite):
     def __init__(self,x,y):
         Sprite.__init__(self)
-        self.image = load('1200px-Brick_Block.png')
+        self.image = load('blok.png')
+        self.rect = self.image.get_rect()
+        self.rect.x = x
+        self.rect.y = y
+
+class BlockDie_1(Sprite):
+    def __init__(self,x,y):
+        Sprite.__init__(self)
+        self.image = load('Fire.png')
+        self.rect = self.image.get_rect()
+        self.rect.x = x
+        self.rect.y = y
+
+class BlockDie_2(Sprite):
+    def __init__(self,x,y):
+        Sprite.__init__(self)
+        self.image = load('Axe_1.png')
+        self.rect = self.image.get_rect()
+        self.rect.x = x
+        self.rect.y = y
+
+class BlockDie_3(Sprite):
+    def __init__(self,x,y):
+        Sprite.__init__(self)
+        self.image = load('Axe_2.png')
+        self.rect = self.image.get_rect()
+        self.rect.x = x
+        self.rect.y = y
+
+class Umnov(Sprite):
+    def __init__(self,x,y):
+        Sprite.__init__(self)
+        self.image = load('Umnov.png')
+        self.rect = self.image.get_rect()
+        self.rect.x = x
+        self.rect.y = y
+        self.xvel = 5
+    def collide(self,platforms):
+        for pl in platforms:
+            if collide_rect(self,pl):
+                self.xvel = - self.xvel
+                break
+    def update(self, platforms):
+        self.rect.x += self.xvel
+        self.collide(platforms)
+
+class Autsave(Sprite):
+    def __init__(self,x,y):
+        Sprite.__init__(self)
+        self.image = load('Axe_2.png')
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y
