@@ -3,9 +3,9 @@ from pygame import Surface
 from pygame.sprite import Sprite, collide_rect
 from pygame.image import load
 MOVE_SPEED = 0.6
-GRAVITY = 0.3
-JUMP_POWER = 10
-LIMIT_SPEED = 30
+GRAVITY = 0.4
+JUMP_POWER = 12
+LIMIT_SPEED = 40
 class Player(Sprite):
     def __init__(self,x,y):
         Sprite.__init__(self)
@@ -27,8 +27,8 @@ class Player(Sprite):
                     self.yvel = 0
                     self.xvel = 0
                 if d == 1:
-                    self.rect.x = 2600
-                    self.rect.y = 80
+                    self.rect.x = 2520
+                    self.rect.y = 160
                     self.yvel = 0
                     self.xvel = 0      
                 if d == 2:
@@ -44,14 +44,21 @@ class Player(Sprite):
 
     def update(self,left,up,right,platforms):
         if left:
+            if self.xvel == 0:
+                 self.xvel = -5
             self.xvel -=  MOVE_SPEED
             if abs(self.xvel) > LIMIT_SPEED:
-                self.xvel +=  MOVE_SPEED       
+                self.xvel +=  MOVE_SPEED 
+            if self.xvel > 15: # антиинерция
+                self.xvel = 15           
         if right:
+            if self.xvel == 0:
+                 self.xvel = 5
             self.xvel += MOVE_SPEED
             if abs(self.xvel) > LIMIT_SPEED:
                 self.xvel -=  MOVE_SPEED 
- 
+            if self.xvel < -15: # антиинерция
+                self.xvel = -15   
         if not(left or right):
             self.xvel = 0
         if up:
@@ -81,4 +88,25 @@ class Player(Sprite):
                     self.rect.top = pl.rect.bottom
                     self.yvel = 0
 
+    def autsave(self, d, autsave_blocks, sprite_group):  
+        for i in range(len(autsave_blocks)):
+            if collide_rect(self,autsave_blocks[i]):
+                sprite_group.remove(autsave_blocks[i])
+                return (i + 1)
+        return d
 
+    def end(self, end_level, i, d, autsave_blocks, sprite_group):
+        if collide_rect(self,end_level):
+            i += 1
+            d = 0
+            for aut in autsave_blocks:
+                if aut not in sprite_group:
+                    sprite_group.add(aut)
+            self.rect.x = 80
+            self.rect.y = 80
+            self.yvel = 0
+            self.xvel = 0
+            tmp = 'Super Mario. Score = ' + str(i) 
+            pygame.display.set_caption(tmp)
+        return [i,d]    
+            
