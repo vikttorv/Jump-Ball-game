@@ -53,7 +53,14 @@ class Umnov(Sprite):
 class Autsave(Sprite):
     def __init__(self,x,y):
         Sprite.__init__(self)
-        self.image = load('Axe_2.png')
+        self.image = load('autsave.png')
+        self.rect = self.image.get_rect()
+        self.rect.x = x
+        self.rect.y = y
+class End(Sprite):
+    def __init__(self,x,y):
+        Sprite.__init__(self)
+        self.image = load('main_boss.png')
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y
