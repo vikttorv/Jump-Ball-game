@@ -5,7 +5,7 @@ from pygame.sprite import Sprite, collide_rect
 class Platform(Sprite):
     def __init__(self, x, y):
         Sprite.__init__(self)
-        self.image = load('blok.png')
+        self.image = load('images/Blok.png')
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y
@@ -14,7 +14,7 @@ class Platform(Sprite):
 class BlockDie_1(Sprite):
     def __init__(self, x, y):
         Sprite.__init__(self)
-        self.image = load('Fire.png')
+        self.image = load('images/Fire.png')
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y
@@ -23,7 +23,7 @@ class BlockDie_1(Sprite):
 class BlockDie_2(Sprite):
     def __init__(self, x, y):
         Sprite.__init__(self)
-        self.image = load('Axe_1.png')
+        self.image = load('images/Axe_1.png')
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y
@@ -32,7 +32,7 @@ class BlockDie_2(Sprite):
 class BlockDie_3(Sprite):
     def __init__(self, x, y):
         Sprite.__init__(self)
-        self.image = load('Axe_2.png')
+        self.image = load('images/Axe_2.png')
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y
@@ -41,7 +41,7 @@ class BlockDie_3(Sprite):
 class Umnov(Sprite):
     def __init__(self, x, y):
         Sprite.__init__(self)
-        self.image = load('Umnov.png')
+        self.image = load('images/Umnov.png')
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y
@@ -63,7 +63,7 @@ class Umnov(Sprite):
 class Autsave(Sprite):
     def __init__(self, x, y):
         Sprite.__init__(self)
-        self.image = load('autsave.png')
+        self.image = load('images/Autsave.png')
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y
@@ -72,10 +72,9 @@ class Autsave(Sprite):
 class End(Sprite):
     def __init__(self, x, y):
         Sprite.__init__(self)
-        self.image = load('main_boss.png')
+        self.image = load('images/Main_boss.png')
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y
-
 
             
