@@ -12,7 +12,7 @@ LIMIT_SPEED = 40
 class Player(Sprite):
     def __init__(self,x,y):
         Sprite.__init__(self)
-        self.image = load('ball1.png')
+        self.image = load('images/Ball1.png')
 
         # Снятие прямоугольника с картинки героя.
         self.rect = self.image.get_rect()
@@ -52,8 +52,20 @@ class Player(Sprite):
                     self.yvel = 0
                     self.xvel = 0
     
-    # Метод класса, отвечающий за обновление координат героя.
-    def update(self, left, up, right, platforms):
+    # Метод класса, отвечающий за обновление координат героя.  
+    def update(self, left, up, right, platforms, hack, new_x, new_y, camera):
+
+        # Перемещение для разработчиков.
+        if hack:
+            self.rect.x = new_x - camera.state.x
+            self.rect.y = new_y - camera.state.y
+            self.y = 0
+            self.x = 0
+            hack = False
+            OnGround = True
+            return
+
+        # Перемещение влево.
         if left:
 
             # Изменение self.xvel для более быстрого набора скорости.
@@ -155,11 +167,8 @@ class Player(Sprite):
             self.rect.y = 80
             self.yvel = 0
             self.xvel = 0
-            tmp = 'Super Mario. Score = ' + str(i) 
+            tmp = 'Super Mario. Score = ' + str(score) 
             pygame.display.set_caption(tmp)
         return [score,d]    
             
-            
-                
-
 
