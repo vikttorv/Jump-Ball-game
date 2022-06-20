@@ -1,2 +1,2 @@
 # Jump-Ball-game
-The game for the computer science course at term 2.
+The game for the python course at term 2.
